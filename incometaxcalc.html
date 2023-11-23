@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Income Tax Calculator</h1>
+
+<form>
+    <label for="t">Taxable Income: </label>
+    <input type="number" id="t">
+
+    <button>Calculate</button>
+    <label for="incometax">Income Tax:</label>
+    <input readonly type="number" id="incometax"> <br>
+</form>
+
+<a href="index.html"> Go back to homepage </a>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var calculateButton = document.querySelector('button');
+        calculateButton.addEventListener("click", function (event) {
+            event.preventDefault(); 
+            incometax();
+        });
+
+        function incometax() {
+            var t = parseFloat(document.getElementById("t").value);
+            var incometax = 0;
+
+            if (t < 250000) {
+                incometax = 0;
+            } else if (t >= 250000 && t < 400000) {
+                incometax = (t - 250000) * 0.20;
+            } else if (t >= 400000 && t < 800000) {
+                incometax = (t - 400000) * 0.25 + 30000;
+            } else if (t >= 800000 && t < 2000000) {
+                incometax = (t - 800000) * 0.30 + 130000;
+            } else if (t >= 2000000 && t < 8000000) {
+                incometax = (t - 2000000) * 0.32 + 490000;
+            } else {
+                incometax = (t - 8000000) * 0.35 + 2410000;
+            }
+
+            document.getElementById("incometax").value = incometax.toFixed(2);
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

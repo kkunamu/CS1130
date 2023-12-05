@@ -1,3 +1,5 @@
+/* itcstyles.css */
+
 body {
     position: relative;
     background-image: url("https://i.pinimg.com/originals/24/28/32/2428322d95accb665e01ff53d92f2c3c.gif");   
@@ -9,15 +11,6 @@ body {
     background-color: black;
     color: white;
     overflow: hidden;
-}
-
-hr {
-    height: 1px;
-    width: 75%;
-    border: 0;
-    border-top: 1px solid #CD9DD7;
-    margin: auto;
-    padding: 0;
 }
 
 #overlay {
@@ -36,10 +29,35 @@ hr {
 #nameInput {
     padding: 20px;
     background-color: #8F4FA0;
-    border-radius: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#userNameInput {
+    margin-bottom: 10px;
+}
+
+#pressEnter {
+    color: #604771;
+    font-weight: bold;
 }
 
 #arrow {
     font-size: 24px;
     cursor: pointer;
+    display: block; /* Make the arrow a block-level element */
+    margin-top: 10px; /* Adjust the margin to control the space between welcome message and arrow */
 }
+
+#welcomeMessage {
+    font-size: 150px; /* Set to a larger pixel value */
+    margin-top: 50vh; /* Start in the middle of the screen */
+    transform: translateY(-50%);
+}
+
+#assignmentList {
+    display: none;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+}
+    

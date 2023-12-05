@@ -36,11 +36,20 @@
             assignmentList.style.display = "block";
         }
 
+        function resetState() {
+            document.getElementById("overlay").style.display = "flex";
+            document.getElementById("welcomeMessage").style.display = "block";
+            document.getElementById("arrow").style.display = "block";
+            document.getElementById("assignmentList").style.display = "none";
+            document.getElementById("userNameInput").value = "";
+        }
+
         // Check if user's name is stored in localStorage
         window.onload = function() {
             var storedUserName = localStorage.getItem("userName");
             if (storedUserName) {
-                showAssignments(); // Skip prompt and show assignments directly
+                // Directly call showAssignments if user's name is stored
+                showAssignments();
             } else {
                 // Delayed prompt messages
                 setTimeout(function() {
@@ -72,5 +81,10 @@
             <a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
         </div>
     </div>
+
+    <script>
+        // Reset the state when the page is loaded
+        resetState();
+    </script>
 </body>
 </html>

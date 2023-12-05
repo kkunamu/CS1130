@@ -8,13 +8,13 @@
     <script>
         function showAssignments() {
             var userNameInput = document.getElementById("userNameInput");
-            var userName = userNameInput.value.trim();
+            var userName = userNameInput.value.trim().toLowerCase();
 
             if (userName !== "") {
                 var fontSize = Math.min(36, 120 / Math.max(1, userName.length));
                 
                 var welcomeMessage = document.getElementById("welcomeMessage");
-                welcomeMessage.innerHTML = "Welcome " + userName;
+                welcomeMessage.innerHTML = "welcome " + userName;
                 welcomeMessage.style.fontSize = fontSize + "px";
                 
                 document.getElementById("overlay").style.display = "none";
@@ -22,6 +22,8 @@
 
                 // Store the user's name in localStorage
                 localStorage.setItem("userName", userName);
+                
+                document.getElementById("blurredBackground").style.display = "block";
             }
         }
 
@@ -56,26 +58,28 @@
                 document.getElementById("assignmentList").style.display = "block";
             } else {
                 // Delayed prompt messages
-                setTimeout(function() {
-                    document.getElementById("promptMessage").innerHTML = "What's your name?";
-                    document.getElementById("userNameInput").style.display = "block";
-                    document.getElementById("pressEnter").style.display = "block";
-                }, 3000);
+                    setTimeout(function() {
+                        document.getElementById("promptMessage").innerHTML = "What's your name?";
+                        document.getElementById("userNameInput").style.display = "block";
+                        document.getElementById("pressEnter").style.display = "block";
+                    }, 3000);
             }
         };
     </script>
 </head>
 <body>
+    <div id="blurredBackground"></div>
+
     <div id="overlay">
         <div id="nameInput">
-            <h2 id="promptMessage">Hallo! </h2>
+            <h2 id="promptMessage">Hallo!</h2>
             <input type="text" id="userNameInput" onkeydown="if(event.key==='Enter') showAssignments()" style="display: none;">
             <p id="pressEnter" style="display: none;">press enter</p>
         </div>
     </div>
 
     <div id="content" style="display: none;">
-        <h1 id="welcomeMessage">Welcome</h1>
+            <h1 id="welcomeMessage">Welcome</h1> 
         <span id="arrow" onclick="toggleAssignments()">&#9658;</span>
 
         <div id="assignmentList" style="display: none;">

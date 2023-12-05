@@ -48,8 +48,12 @@
         window.onload = function() {
             var storedUserName = localStorage.getItem("userName");
             if (storedUserName) {
-                // Directly call showAssignments if user's name is stored
-                showAssignments();
+                // Skip the entire overlay, welcome message, and show the assignment list
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                document.getElementById("welcomeMessage").style.display = "none";
+                document.getElementById("arrow").style.display = "none";
+                document.getElementById("assignmentList").style.display = "block";
             } else {
                 // Delayed prompt messages
                 setTimeout(function() {

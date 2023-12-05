@@ -1,9 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Program</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    #deleteButtons {
+      margin-bottom: 10px;
+    }
+
+    #deleteButtons button {
+      margin-right: 5px;
+    }
+  </style>
+</head>
 <body>
 
-<h1>Simple Payroll</h1>
-<p>My first paragraph.</p>
+<h2>Payroll Program</h2>
+
+<form id="employeeForm">
+  <label for="employeeName">Employee Name:</label>
+  <input type="text" id="employeeName" required>
+
+  <label for="daysWorked">Days Worked:</label>
+  <input type="number" id="daysWorked" required>
+
+  <label for="dailyRate">Daily Rate:</label>
+  <input type="number" id="dailyRate" required>
+
+  <label for="deductionAmount">Deduction Amount:</label>
+  <input type="number" id="deductionAmount" required>
+
+  <div class="action-buttons">
+    <button type="button" onclick="addEmployee()">Add Employee</button>
+    <button type="button" onclick="deleteEmployee()">Delete Employee</button>
+  </div>
+</form>
+
+<table id="payrollTable">
+  <tr>
+    <th>No.</th>
+    <th>Employee Name</th>
+    <th>Days Worked</th>
+    <th>Daily Rate</th>
+    <th>Gross Pay</th>
+    <th>Deduction Amount</th>
+    <th>Net Pay</th>
+  </tr>
+</table>
+
+<script>
+  // Initialize an empty payroll array to store employee details
+  let payrollList = [];
+
+  // Function to calculate Gross Pay and Net Pay
+  function calculatePay(daysWorked, dailyRate, deductionAmount) {
+    const grossPay = daysWorked * dailyRate;
+    const netPay = grossPay - deductionAmount;
+    return { grossPay, netPay };
+  }
+
+  // Function to update the payroll table
+  function updateTable() {
+    const table = document.getElementById('payrollTable');
+    table.innerHTML = `
+      <tr>
+        <th>No.</th>
+        <th>Employee Name</th>
+        <th>Days Worked</th>
+        <th>Daily Rate</th>
+        <th>Gross Pay</th>
+        <th>Deduction Amount</th>
+        <th>Net Pay</th>
+      </tr>
+    `;
+
+    payrollList.forEach((employee, index) => {
+      const { daysWorked, dailyRate, deductionAmount } = employee;
+      const { grossPay, netPay } = calculatePay(daysWorked, dailyRate, deductionAmount);
+
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${employee.employeeName}</td>
+        <td>${daysWorked}</td>
+        <td>${dailyRate}</td>
+        <td>${grossPay}</td>
+        <td>${deductionAmount}</td>
+        <td>${netPay}</td>
+      `;
+    });
+  }
+
+  // Function to add an employee to the payroll list
+  function addEmployee() {
+    const employeeName = document.getElementById('employeeName').value;
+    const daysWorked = parseInt(document.getElementById('daysWorked').value, 10);
+    const dailyRate = parseFloat(document.getElementById('dailyRate').value);
+    const deductionAmount = parseFloat(document.getElementById('deductionAmount').value);
+
+    if (employeeName && !isNaN(daysWorked) && !isNaN(dailyRate) && !isNaN(deductionAmount)) {
+      payrollList.push({ employeeName, daysWorked, dailyRate, deductionAmount });
+      updateTable();
+      document.getElementById('employeeForm').reset();
+    } else {
+      alert('Please fill in all fields with valid values.');
+    }
+  }
+
+  // Function to delete an employee from the payroll list
+  function deleteEmployee() {
+    const inputLineNumber = prompt('Enter the Line Number to delete:');
+    const lineNumberToDelete = parseInt(inputLineNumber, 10);
+
+    if (!isNaN(lineNumberToDelete) && lineNumberToDelete >= 1 && lineNumberToDelete <= payrollList.length) {
+      payrollList.splice(lineNumberToDelete - 1, 1);
+      updateTable();
+    } else {
+      alert('Invalid line number. Please enter a valid line number.');
+    }
+  }
+
+  // Example initial data
+  addEmployee("John Doe", 20, 10, 50);
+  addEmployee("Jane Smith", 25, 12, 40);
+</script>
 
 </body>
 </html>

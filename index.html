@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> Rainy's ITC Website </title>
+    <title>Rainy's ITC Website</title>
+    <link rel="stylesheet" href="itcstyles.css">
 </head>
 <body>
+    <div id="overlay">
+        <div id="nameInput">
+            <h2>Please enter your name:</h2>
+            <input type="text" id="userNameInput">
+            <button onclick="showAssignments()">Submit</button>
+        </div>
+    </div>
 
-<h1>Welcome</h1>
+    <div id="content" style="display: none;">
+        <br>
+        <br>
+        <hr>
+        
+        <!-- Display the welcome message with an arrow -->
+        <h1 id="welcomeMessage">Welcome <span id="arrow">&#9658;</span></h1>
 
-<a href="Conversions/conversionhome.html">Assignment 1: Conversions</a> <br>
-<a href="incometaxcalc.html">Assignment 2: Income Tax Calculator</a><br>
-<a href="firstnnumbers.html"> Assignment 3: First N Numbers</a><br>
-<a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
+        <div id="assignmentList" style="display: none;">
+            <a href="Conversions/conversionhome.html">Assignment 1: Conversions</a> <br>
+            <a href="incometaxcalc.html">Assignment 2: Income Tax Calculator</a><br>
+            <a href="firstnnumbers.html"> Assignment 3: First N Numbers</a><br>
+            <a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
+        </div>
+        
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>

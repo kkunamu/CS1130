@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rainy's ITC Website</title>
     <link rel="stylesheet" href="itcstyles.css">
 </head>
@@ -19,15 +21,15 @@
         <hr>
         
         <!-- Display the welcome message with an arrow -->
-        <h1 id="welcomeMessage">Welcome <span id="arrow">&#9658;</span></h1>
+        <h1 id="welcomeMessage">Welcome <span id="arrow" onclick="toggleAssignments()">&#9658;</span></h1>
 
-        <div id="assignmentList" style="display: none;">
+        <!-- Your assignments go here -->
+        <div id="assignmentList">
             <a href="Conversions/conversionhome.html">Assignment 1: Conversions</a> <br>
             <a href="incometaxcalc.html">Assignment 2: Income Tax Calculator</a><br>
             <a href="firstnnumbers.html"> Assignment 3: First N Numbers</a><br>
             <a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
         </div>
-        
     </div>
 
     <script>

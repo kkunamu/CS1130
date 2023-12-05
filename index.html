@@ -20,7 +20,7 @@
                 document.getElementById("overlay").style.display = "none";
                 document.getElementById("content").style.display = "block";
 
-                
+                // Store the user's name in localStorage
                 localStorage.setItem("userName", userName);
             }
         }
@@ -36,20 +36,13 @@
             assignmentList.style.display = "block";
         }
 
-        
+        // Check if user's name is stored in localStorage
         window.onload = function() {
             var storedUserName = localStorage.getItem("userName");
             if (storedUserName) {
-                var welcomeMessage = document.getElementById("welcomeMessage");
-                var arrow = document.getElementById("arrow");
-                var assignmentList = document.getElementById("assignmentList");
-
-                welcomeMessage.style.display = "none";
-                arrow.style.display = "none";
-
-                assignmentList.style.display = "block";
+                showAssignments(); // Skip prompt and show assignments directly
             } else {
-                
+                // Delayed prompt messages
                 setTimeout(function() {
                     document.getElementById("promptMessage").innerHTML = "What's your name?";
                     document.getElementById("userNameInput").style.display = "block";

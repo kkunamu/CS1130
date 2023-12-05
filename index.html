@@ -6,12 +6,6 @@
     <title>Rainy's ITC Website</title>
     <link rel="stylesheet" href="itcstyles.css">
     <script>
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                showAssignments();
-            }
-        }
-
         function showAssignments() {
             var userNameInput = document.getElementById("userNameInput");
             var userName = userNameInput.value.trim();
@@ -26,7 +20,7 @@
                 document.getElementById("overlay").style.display = "none";
                 document.getElementById("content").style.display = "block";
 
-                // Store the user's name in localStorage
+                
                 localStorage.setItem("userName", userName);
             }
         }
@@ -42,28 +36,34 @@
             assignmentList.style.display = "block";
         }
 
-        // Check if user's name is stored in localStorage
+        
         window.onload = function() {
             var storedUserName = localStorage.getItem("userName");
             if (storedUserName) {
-                var userNameInput = document.getElementById("userNameInput");
-                userNameInput.value = storedUserName;
+                var welcomeMessage = document.getElementById("welcomeMessage");
+                var arrow = document.getElementById("arrow");
+                var assignmentList = document.getElementById("assignmentList");
+
+                welcomeMessage.style.display = "none";
+                arrow.style.display = "none";
+
+                assignmentList.style.display = "block";
+            } else {
+                
+                setTimeout(function() {
+                    document.getElementById("promptMessage").innerHTML = "What's your name?";
+                    document.getElementById("userNameInput").style.display = "block";
+                    document.getElementById("pressEnter").style.display = "block";
+                }, 3000);
             }
         };
-
-       
-        setTimeout(function() {
-            document.getElementById("promptMessage").innerHTML = "What's your name?";
-            document.getElementById("userNameInput").style.display = "block";
-            document.getElementById("pressEnter").style.display = "block";
-        }, 3000);
     </script>
 </head>
 <body>
     <div id="overlay">
         <div id="nameInput">
             <h2 id="promptMessage">Hallo! </h2>
-            <input type="text" id="userNameInput" onkeydown="checkEnter(event)" style="display: none;">
+            <input type="text" id="userNameInput" onkeydown="if(event.key==='Enter') showAssignments()" style="display: none;">
             <p id="pressEnter" style="display: none;">press enter</p>
         </div>
     </div>

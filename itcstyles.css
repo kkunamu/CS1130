@@ -13,6 +13,9 @@ body {
     overflow: hidden;
 }
 
+h2 {
+    font-size: 20px;
+}
 #overlay {
     display: flex;
     align-items: center;
@@ -27,20 +30,40 @@ body {
 }
 
 #nameInput {
-    padding: 20px;
-    background-color: #8F4FA0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    width: 250px;
+    background-color: rgba(143, 79, 160, 0.5); /* Adjust the alpha channel for opacity */
     border-radius: 5px;
     text-align: center;
 }
 
 #userNameInput {
     margin-bottom: 10px;
+    width: 200px; /* Adjust the width as needed */
+    background-color: rgba(255, 255, 255, 1); /* Adjust the alpha channel for opacity */
 }
 
-#pressEnter {
-    color: #604771;
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  #pressEnter { 
+    color:      #8a6aa0;
     font-weight: bold;
-}
+    animation: blink 1.5s infinite; /* Adjust the animation duration as needed */
+  }  
 
 #arrow {
     font-size: 24px;
@@ -60,4 +83,3 @@ body {
     margin-top: 50vh;
     transform: translateY(-50%);
 }
-    

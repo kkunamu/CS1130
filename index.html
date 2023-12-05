@@ -1,63 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rainy's ITC Website</title>
-    <link rel="stylesheet" href="itcstyles.css">
-    <script>
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                showAssignments();
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rainy's ITC Website</title>
+        <link rel="stylesheet" href="itcstyles.css">
+        <script>
+            function checkEnter(event) {
+                if (event.key === 'Enter') {
+                    showAssignments();
+                }
             }
-        }
 
-        function showAssignments() {
-            var userName = document.getElementById("userNameInput").value;
-            if (userName.trim() !== "") {
-                var fontSize = Math.min(36, 120 / Math.max(1, userName.length));
-                
+            function showAssignments() {
+                var userName = document.getElementById("userNameInput").value;
+                if (userName.trim() !== "") {
+                    var fontSize = Math.min(36, 120 / Math.max(1, userName.length));
+                    
+                    var welcomeMessage = document.getElementById("welcomeMessage");
+                    welcomeMessage.innerHTML = "Welcome " + userName;
+                    welcomeMessage.style.fontSize = fontSize + "px";
+                    
+                    document.getElementById("overlay").style.display = "none";
+                    document.getElementById("content").style.display = "block";
+                }
+            }
+
+            function toggleAssignments() {
                 var welcomeMessage = document.getElementById("welcomeMessage");
-                welcomeMessage.innerHTML = "Welcome " + userName;
-                welcomeMessage.style.fontSize = fontSize + "px";
-                
-                document.getElementById("overlay").style.display = "none";
-                document.getElementById("content").style.display = "block";
+                var arrow = document.getElementById("arrow");
+                var assignmentList = document.getElementById("assignmentList");
+
+                welcomeMessage.style.display = "none";
+                arrow.style.display = "none";
+
+                assignmentList.style.display = "block";
             }
-        }
 
-        function toggleAssignments() {
-            var welcomeMessage = document.getElementById("welcomeMessage");
-            var arrow = document.getElementById("arrow");
-            var assignmentList = document.getElementById("assignmentList");
-
-            welcomeMessage.style.display = "none";
-            arrow.style.display = "none";
-
-            assignmentList.style.display = "block";
-        }
-    </script>
-</head>
-<body>
-    <div id="overlay">
-        <div id="nameInput">
-            <h2>Enter your name:</h2>
-            <input type="text" id="userNameInput" onkeydown="checkEnter(event)">
-            <p id="pressEnter">Press Enter</p>
+            setTimeout(function() {
+                document.getElementById("promptMessage").innerHTML = "What's your name?";
+                document.getElementById("userNameInput").style.display = "block";
+                document.getElementById("pressEnter").style.display = "block";
+            }, 2000);
+        </script>
+    </head>
+    <body>
+        <div id="overlay">
+            <div id="nameInput">
+                <h2 id="promptMessage">Hallo! </h2>
+                <input type="text" id="userNameInput" onkeydown="checkEnter(event)" style="display: none;">
+                <p id="pressEnter" style="display: none;">press enter</p>
+            </div>
         </div>
-    </div>
 
-    <div id="content" style="display: none;">
-        <!-- Adjusted styles for welcome message -->
-        <h1 id="welcomeMessage">Welcome</h1>
-        <span id="arrow" onclick="toggleAssignments()">&#9658;</span>
+        <div id="content" style="display: none;">
+            <h1 id="welcomeMessage">Welcome</h1>
+            <span id="arrow" onclick="toggleAssignments()">&#9658;</span>
 
-        <div id="assignmentList" style="display: none;">
-            <a href="Conversions/conversionhome.html">Assignment 1: Conversions</a> <br>
-            <a href="incometaxcalc.html">Assignment 2: Income Tax Calculator</a><br>
-            <a href="firstnnumbers.html"> Assignment 3: First N Numbers</a><br>
-            <a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
+            <div id="assignmentList" style="display: none;">
+                <a href="Conversions/conversionhome.html">Assignment 1: Conversions</a> <br>
+                <a href="incometaxcalc.html">Assignment 2: Income Tax Calculator</a><br>
+                <a href="firstnnumbers.html"> Assignment 3: First N Numbers</a><br>
+                <a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
+            </div>
         </div>
-    </div>
-</body>
-</html>
+    </body>
+    </html>

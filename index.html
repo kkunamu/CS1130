@@ -1,98 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>花樣年華</title>
-    <link rel="stylesheet" href="itcstyles.css">
-    <script>
-        function showAssignments() {
-            var userNameInput = document.getElementById("userNameInput");
-            var userName = userNameInput.value.trim().toLowerCase();
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>花樣年華</title>
+        <link rel="stylesheet" href="itcstyles/indexstyles.css">
+    </head>
+    <body>
+        <div id="blurredBackground"></div>
 
-            if (userName !== "") {
-                var fontSize = Math.min(36, 120 / Math.max(1, userName.length));
-                
-                var welcomeMessage = document.getElementById("welcomeMessage");
-                welcomeMessage.innerHTML = "welcome " + userName;
-                welcomeMessage.style.fontSize = fontSize + "px";
-                
-                document.getElementById("overlay").style.display = "none";
-                document.getElementById("content").style.display = "block";
-
-                // Store the user's name in localStorage
-                localStorage.setItem("userName", userName);
-                
-                document.getElementById("blurredBackground").style.display = "block";
-            }
-        }
-
-        function toggleAssignments() {
-            var welcomeMessage = document.getElementById("welcomeMessage");
-            var arrow = document.getElementById("arrow");
-            var assignmentList = document.getElementById("assignmentList");
-
-            welcomeMessage.style.display = "none";
-            arrow.style.display = "none";
-
-            assignmentList.style.display = "block";
-        }
-
-        function resetState() {
-            document.getElementById("overlay").style.display = "flex";
-            document.getElementById("welcomeMessage").style.display = "block";
-            document.getElementById("arrow").style.display = "block";
-            document.getElementById("assignmentList").style.display = "none";
-            document.getElementById("userNameInput").value = "";
-        }
-
-        // Check if user's name is stored in localStorage
-        window.onload = function() {
-            var storedUserName = localStorage.getItem("userName");
-            if (storedUserName) {
-                // Skip the entire overlay, welcome message, and show the assignment list
-                document.getElementById("overlay").style.display = "none";
-                document.getElementById("content").style.display = "block";
-                document.getElementById("welcomeMessage").style.display = "none";
-                document.getElementById("arrow").style.display = "none";
-                document.getElementById("assignmentList").style.display = "block";
-            } else {
-                // Delayed prompt messages
-                    setTimeout(function() {
-                        document.getElementById("promptMessage").innerHTML = "What's your name?";
-                        document.getElementById("userNameInput").style.display = "block";
-                        document.getElementById("pressEnter").style.display = "block";
-                    }, 3000);
-            }
-        };
-    </script>
-</head>
-<body>
-    <div id="blurredBackground"></div>
-
-    <div id="overlay">
-        <div id="nameInput">
-            <h2 id="promptMessage">Hallo!</h2>
-            <input type="text" id="userNameInput" onkeydown="if(event.key==='Enter') showAssignments()" style="display: none;">
-            <p id="pressEnter" style="display: none;">press enter</p>
+        <div id="overlay">
+            <div id="nameInput">
+                <h2 id="promptMessage">Hallo!</h2>
+                <input type="text" id="userNameInput" onkeydown="if(event.key==='Enter') showAssignments()" style="display: none;">
+                <p id="pressEnter" style="display: none;">press enter</p>
+            </div>
         </div>
-    </div>
 
-    <div id="content" style="display: none;">
+        <div id="content" style="display: none;">
             <h1 id="welcomeMessage">Welcome</h1> 
-        <span id="arrow" onclick="toggleAssignments()">&#9658;</span>
+            <span id="arrow" onclick="toggleAssignments()">&#9658;</span>
+        
+            <h2 id="help"> what can i help you with?</h2>
 
-        <div id="assignmentList" style="display: none;">
-            <a href="Conversions/conversionhome.html">Assignment 1: Conversions</a> <br>
-            <a href="incometaxcalc.html">Assignment 2: Income Tax Calculator</a><br>
-            <a href="firstnnumbers.html"> Assignment 3: First N Numbers</a><br>
-            <a href="payroll.html"> Assignment 4: Simple Payroll</a><br>
+            <div id="assignmentList" style="display: none;">
+                <div class="row">
+                    <a href="Conversions/conversionhome.html">Conversions</a>
+                    <a href="firstnnumbers.html">Operations</a>
+                </div>
+                <div class="row">
+                    <a href="payroll.html">Simple Payroll</a>
+                    <a href="incometaxcalc.html">Income Tax Calculator</a>
+                </div>
+            </div>
         </div>
-    </div>
+        
+        <div id="loadingOverlay">
+            <img src="loading/sun.gif" alt="Loading Spinner">
+        </div>
 
-    <script>
-        // Reset the state when the page is loaded
-        resetState();
-    </script>
-</body>
-</html>
+        <script src="script.js" defer></script>
+    </body>
+    </html>

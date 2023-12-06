@@ -1,0 +1,171 @@
+@font-face {
+    font-family: 'FUTRFW';
+    src: url('../fonts/FUTRFW.TTF') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Zector';
+    src: url('../fonts/Zector.ttf') format('truetype');
+  }
+  
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    font-family: 'FUTRFW', 'Zector', Arial, sans-serif;
+    background: #f3f3f9
+}
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card {
+  width: 500px;
+  min-height: 250px;
+  background: rgba(161, 161, 161, 0.15);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 18px );
+  -webkit-backdrop-filter: blur( 18px );
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  border-radius: 1rem;
+  padding: 1.5rem;
+  z-index: 10;
+  color: rgb(68, 68, 68);
+}
+
+.title {
+  color: #FDE128;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.styling-label{
+    font-family: 'Zector' !important;
+    font-size: 20px;
+}
+
+#conversion {
+    /* Your existing styles */
+    font-family: 'Zector' !important;
+    font-size: 15px;
+    margin-bottom: 5px;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #585858;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+
+    /* New styles for aligning to the right */
+    margin-left: auto; /* Push to the right */
+    display: block; /* Ensure block-level display */
+}
+
+
+#number {
+    font-family: 'Zector' !important;
+    font-size: 20px;
+    margin-bottom: 5px;
+    width: 50 px;
+    border: none;
+    border-bottom: 1px solid #585858;
+    background-color: transparent;
+    outline: none;
+    text-align: right;
+}
+.subtitle {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  color: whitesmoke;
+  background-color: #fa709a;
+  padding: 0.8rem 1.8rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 142, 29, 0.42) 31.77%,
+    rgb(255, 230, 2) 100%
+  );
+  mix-blend-mode: color-dodge;
+  -webkit-animation: move 25s infinite alternate;
+          animation: move 25s infinite alternate;
+  transition: 1s cubic-bezier(0.07, 0.8, 0.16, 1);
+}
+
+.blob:hover {
+  width: 520px;
+  height: 520px;
+  -webkit-filter: blur(30px);
+          filter: blur(30px);
+  box-shadow:
+    inset 0 0 0 5px rgba(255,255,255, 0.6),
+    inset 100px 100px 0 0px #E0B1CB,
+    inset 200px 200px 0 0px #9F86C0,
+    inset 300px 300px 0 0px #231942;
+}
+
+@-webkit-keyframes move {
+  from {
+    transform: translate(-100px, -50px) rotate(-90deg);
+    border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%;
+  }
+
+  to {
+    transform: translate(500px, 100px) rotate(-10deg);
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translate(-100px, -50px) rotate(-90deg);
+    border-radius: 24% 76% 35% 65% / 27% 36% 64% 73%;
+  }
+
+  to {
+    transform: translate(500px, 100px) rotate(-10deg);
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+  }
+}
+
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #231942; /* Adjust the background color and transparency as needed */
+    z-index: 9999; /* Make sure it has a higher z-index than other elements */
+    align-items: center;
+    justify-content: center;
+}
+
+#loadingOverlay img {
+    width: 100px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+}

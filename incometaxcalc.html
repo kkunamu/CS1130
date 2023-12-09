@@ -1,52 +1,82 @@
 <!DOCTYPE html>
 <html>
 <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pawsome income tax</title>
+    <link rel="stylesheet" href="../itcstyles/taxcalcstyles.css">
+</head>
+<div class="content-container">
+    <div class="topnav">
+     <img src="../media/blob.png" id="homeblob">
+      <div class="topnav-left">
+        <a href="index.html" class="loading-link">homepage</a>
+        <a href="conversions.html" class="loading-link">conversions</a>
+      </div>
+      <div class="topnav-right">
+        <a href="operations.html" class="loading-link">operations</a>
+        <a href="payroll.html" class="loading-link">payroll</a>
+      </div>
+    </div>
+</div>
+<div class="incometax-container">
+    <div class="upperbox-container">
+        <h1 class="title">Income Tax Calculator</h1>
+    </div>
+    <div class="lowerbox-container">
+        <input type="number" id="income" placeholder="Enter Your Income">
+        <input readonly type="number" id="incometax" placeholder="Income Tax">
+        <a href="index.html">
+            <img src="../media/paw.png" alt="Paw Image" class="paw">
+        </a>
+    </div>
+</div>
 
-<h1>Income Tax Calculator</h1>
-
-<form>
-    <label for="t">Taxable Income: </label>
-    <input type="number" id="t">
-
-    <button>Calculate</button>
-    <label for="incometax">Income Tax:</label>
-    <input readonly type="number" id="incometax"> <br>
-</form>
-
-<a href="index.html"> Go back to homepage </a>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var calculateButton = document.querySelector('button');
-        calculateButton.addEventListener("click", function (event) {
-            event.preventDefault(); 
-            incometax();
-        });
-
-        function incometax() {
-            var t = parseFloat(document.getElementById("t").value);
-            var incometax = 0;
-
-            if (t < 250000) {
-                incometax = 0;
-            } else if (t >= 250000 && t < 400000) {
-                incometax = (t - 250000) * 0.20;
-            } else if (t >= 400000 && t < 800000) {
-                incometax = (t - 400000) * 0.25 + 30000;
-            } else if (t >= 800000 && t < 2000000) {
-                incometax = (t - 800000) * 0.30 + 130000;
-            } else if (t >= 2000000 && t < 8000000) {
-                incometax = (t - 2000000) * 0.32 + 490000;
-            } else {
-                incometax = (t - 8000000) * 0.35 + 2410000;
-            }
-
-            document.getElementById("incometax").value = incometax.toFixed(2);
-        }
+    var incomeInput = document.getElementById("income");
+    
+    // Use keyup event on the income input
+    incomeInput.addEventListener('keyup', function () {
+        calculateIncomeTax();
     });
+
+    function calculateIncomeTax() {
+        var t = parseFloat(incomeInput.value);
+        var incometax = 0;
+
+        if (t < 250000) {
+            incometax = 0;
+        } else if (t >= 250000 && t < 400000) {
+            incometax = (t - 250000) * 0.20;
+        } else if (t >= 400000 && t < 800000) {
+            incometax = (t - 400000) * 0.25 + 30000;
+        } else if (t >= 800000 && t < 2000000) {
+            incometax = (t - 800000) * 0.30 + 130000;
+        } else if (t >= 2000000 && t < 8000000) {
+            incometax = (t - 2000000) * 0.32 + 490000;
+        } else {
+            incometax = (t - 8000000) * 0.35 + 2410000;
+        }
+
+        document.getElementById("incometax").value = incometax.toFixed(2);
+    }
+
+    function toggleTopNav() {
+        const topNavLeft = document.querySelector('.topnav-left');
+        const topNavRight = document.querySelector('.topnav-right');
+
+        topNavLeft.classList.toggle('show');
+        topNavRight.classList.toggle('show');
+    }
+
+    document.getElementById('homeblob').addEventListener('click', function () {
+        toggleTopNav();
+    });
+});
+
 </script>
-
-
-
 </body>
 </html>

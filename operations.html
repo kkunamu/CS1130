@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pawsome operations</title>
+    <link rel="stylesheet" href="../itcstyles/operationstyles.css">
+</head>
+<body>
+    <div class="content-container">
+        <div class="topnav">
+            <img src="../media/cat.png" id="homecat">
+            <div class="topnav-left">
+                <a href="index.html" class="loading-link">homepage</a>
+                <a href="conversions.html" class="loading-link">conversion</a>
+            </div>
+            <div class="topnav-right">
+                <a href="incometaxcalc.html" class="loading-link">income tax</a>
+                <a href="payroll.html" class="loading-link">payroll</a>
+            </div>
+        </div>
+    </div>
+    <div class="looping-container">
+        <div class="upperbox-container">
+            <h1 class="title">looping</h1>
+        </div>
+        <div class="lowerbox-container">
+            <input type="text" id="number" onkeyup="calculate()" placeholder="input positive integer">
+            <input readonly type="number" id="factorial" placeholder="Factorial">
+            <input readonly type="number" id="sum" placeholder="Sum">
+            <input readonly type="number" id="average" placeholder="Average">
+            <a href="index.html">
+                <img src="../media/paw.png" alt="Paw Image" class="paw">
+            </a> 
+        </div>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <p id="modalMessage"></p>
+        </div>
+    </div>
+    <script>
+        function showAlert(message) {
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        } 
+
+        function calculate() {
+            var n = document.getElementById("number").value.trim();
+
+            if (n !== '' && (isNaN(n) || n <= 0 || !Number.isInteger(Number(n)))) {
+                showAlert("❤︎₊ ⊹ please enter a valid positive integer.");
+                return;
+            }
+
+            var factorialResult = calculateFactorial(n);
+            var sumResult = calculateSum(n);
+            var averageResult = calculateAverage(n);
+
+            document.getElementById("factorial").value = parseInt(factorialResult.toFixed(0));
+            document.getElementById("sum").value = parseInt(sumResult.toFixed(0));
+            document.getElementById("average").value = parseInt(averageResult.toFixed(0));
+        }           
+
+        function calculateFactorial(n) {
+            var result = 1;
+
+            for (var i = 1; i <= n; i++) {
+                result *= i;
+            }
+
+            return result;
+        }
+
+        function calculateSum(n) {
+            var sum = 0;
+
+            for (var i = 1; i <= n; i++) {
+                sum += i;
+            }
+
+            return sum;
+        }
+
+        function calculateAverage(n) {
+            var sum = calculateSum(n);
+            return sum / n;
+        }
+
+        // Attach the calculate function to the onkeyup event of the input field
+        document.getElementById('number').addEventListener('keyup', function() {
+            calculate();
+        });
+
+        function toggleTopNav() {
+            const topNavLeft = document.querySelector('.topnav-left');
+            const topNavRight = document.querySelector('.topnav-right');
+
+            topNavLeft.classList.toggle('show');
+            topNavRight.classList.toggle('show');
+        }
+
+        document.getElementById('homecat').addEventListener('click', function() {
+            toggleTopNav();
+        });
+    </script>        
+</body>
+</html>

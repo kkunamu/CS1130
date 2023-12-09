@@ -1,44 +1,65 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>花樣年華</title>
-        <link rel="stylesheet" href="itcstyles/indexstyles.css">
-    </head>
-    <body>
-        <div id="blurredBackground"></div>
-
-        <div id="overlay">
-            <div id="nameInput">
-                <h2 id="promptMessage">Hallo!</h2>
-                <input type="text" id="userNameInput" onkeydown="if(event.key==='Enter') showAssignments()" style="display: none;">
-                <p id="pressEnter" style="display: none;">press enter</p>
-            </div>
-        </div>
-
-        <div id="content" style="display: none;">
-            <h1 id="welcomeMessage">Welcome</h1> 
-            <span id="arrow" onclick="toggleAssignments()">&#9658;</span>
-        
-            <h2 id="help"> what can i help you with?</h2>
-
-            <div id="assignmentList" style="display: none;">
-                <div class="row">
-                    <a href="Conversions/conversionhome.html">Conversions</a>
-                    <a href="firstnnumbers.html">Operations</a>
-                </div>
-                <div class="row">
-                    <a href="payroll.html">Simple Payroll</a>
-                    <a href="incometaxcalc.html">Income Tax Calculator</a>
-                </div>
-            </div>
-        </div>
-        
-        <div id="loadingOverlay">
-            <img src="loading/sun.gif" alt="Loading Spinner">
-        </div>
-
-        <script src="script.js" defer></script>
-    </body>
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pawsome website</title>
+  <link rel="stylesheet" href="../itcstyles/indexstyles.css">
+  <link rel="preload" href="../media/loading1.gif" as="image">
+</head>
+<body>
+<div class="background-container">
+  <div class="blur-background"></div>
+</div>
+<div class="content-container">
+  <div class="topnav">
+    <img src="../media/paw.png" id="homepaw">
+    <div class="topnav-left">
+      <a href="conversions.html">conversions</a>
+      <a href="operations.html">operations</a>
+    </div>
+    <div class="topnav-right">
+      <a href="incometaxcalc.html">income tax</a>
+      <a href="payroll.html">payroll</a>
+    </div>
+  </div>
+</div>
+<div class="menu-container">
+  <div class="welcome-container">
+    <div id="welcomeMessage"></div>
+  </div>
+  <img src="../media/meow.gif" alt="meow" id="meow">
+  <div class="menubox-container">
+    <div class="uppermenu"></div>
+    <div class="lowermenu">
+      <div class="box-container">
+        <div class="menubox" onclick="navigateTo('conversions.html')">conversion</div>
+        <div class="menubox" onclick="navigateTo('operations.html')">operations</div>
+      </div>
+      <div class="box-container">
+        <div class="menubox" onclick="navigateTo('incometaxcalc.html')">income tax</div>
+        <div class="menubox" onclick="navigateTo('payroll.html')">payroll</div>
+      </div>
+    </div>  
+  </div>
+</div>
+  <div class="overlay" id="overlay">
+    <div class="overlay-container">
+      <div class="box">
+        <img src="../media/paw.png" alt="Paw Image" class="paw">
+      </div>
+      <div class="overlay-content">
+        <input type="text" id="userNameInput" placeholder="please enter your name ♡" maxlength="7">
+        <button onclick="processName()">OK</button>
+      </div>
+    </div>
+  </div>  
+<div id="loadingOverlay-conversions">
+  <img id="loadingImage-conversions" src="" alt="Loading Image">
+</div>
+<div id="loadingOverlay-operations">
+  <img id="loadingImage-operations" src="" alt="Loading Image">
+</div>
+<script src="script.js" defer></script>
+</body>
+</html>

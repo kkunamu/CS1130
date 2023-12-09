@@ -1,0 +1,103 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>pawsome conversions</title>
+        <link rel="stylesheet" href="../itcstyles/conversionstyles.css">
+    </head>
+    <body>
+        <div class="content-container">
+            <div class="topnav">
+             <img src="../media/head.gif" id="homehead">
+              <div class="topnav-left">
+                <a href="index.html" class="loading-link">homepage</a>
+                <a href="operations.html" class="loading-link">operations</a>
+              </div>
+              <div class="topnav-right">
+                <a href="incometaxcalc.html" class="loading-link">income tax</a>
+                <a href="payroll.html" class="loading-link">payroll</a>
+              </div>
+            </div>
+        </div>
+        <div class="conversion-container">
+            <div class="upperbox-container">
+                <h1 class="title">conversions</h1>
+            </div>
+            <div class="lowerbox-container">
+                <select id="conversion" onchange="clearResult()">
+                    <option value="celsiusToFahrenheit">Celsius to Fahrenheit</option>
+                    <option value="fahrenheitToCelsius">Fahrenheit to Celsius</option>
+                    <option value="metersToFeet">Meters to Feet</option>
+                    <option value="feetToMeters">Feet to Meters</option>
+                </select>
+                <input type="text" id="number" onkeyup="convert()" placeholder="enter number">
+                <input type="text" id="result" readonly placeholder="result">
+                <h1 id="result_description"></h1>
+                <a href="index.html">
+                    <img src="../media/paw.png" alt="Paw Image" class="paw">
+                </a>           
+            </div>
+        </div>
+          
+        <script>
+
+        function convert() {
+            var conversionType = document.getElementById('conversion').value;
+            var number = parseFloat(document.getElementById('number').value);
+            var result = 0;
+            var message;
+
+            switch (conversionType) {
+                case 'celsiusToFahrenheit':
+                    result = (number * 1.8) + 32;
+                    message = " °C";
+                    break;
+                case 'fahrenheitToCelsius':
+                    result = (number - 32) / 1.8;
+                    message = " °F";
+                    break;
+                case 'metersToFeet':
+                    result = number * 3.28084;
+                    if (result <= 1) {
+                        message = " foot";
+                    } else {
+                        message = " feet";
+                    }
+                    break;
+                case 'feetToMeters':
+                    result = number / 3.28084;
+                    if (result <= 1) {
+                        message = " meter";
+                    } else {
+                        message = " meters";
+                    }
+                    break;
+                default:
+                    result = 'Invalid conversion type';
+            }
+
+            // Round result to 0 decimal places
+            result = parseInt(result.toFixed(0));
+
+            document.getElementById('result').value = result;
+            document.getElementById('result_description').innerHTML = "result: " + result + message;
+        }
+
+        function clearResult() {
+            document.getElementById('result').value = '';
+        }
+        function toggleTopNav() {
+            const topNavLeft = document.querySelector('.topnav-left');
+            const topNavRight = document.querySelector('.topnav-right');
+
+            topNavLeft.classList.toggle('show');
+            topNavRight.classList.toggle('show');
+        }
+
+        document.getElementById('homepaw').addEventListener('click', function() {
+            toggleTopNav();
+        });
+        </script>
+    </body>
+    </html>

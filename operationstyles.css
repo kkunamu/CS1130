@@ -1,16 +1,16 @@
 @font-face {
     font-family: 'etw';
-    src: url('../fonts/etw.ttf') format('truetype');
+    src: url('etw.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'cherl';
-    src: url('../fonts/cherl.TTF') format('truetype');
+    src: url('cherl.TTF') format('truetype');
 }
 
 @font-face {
     font-family: 'cheri';
-    src: url('../fonts/cheri.TTF') format('truetype');
+    src: url('cheri.TTF') format('truetype');
 }
 
 body, html {
@@ -18,7 +18,7 @@ body, html {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background: url('../media/bg3.gif') center/cover no-repeat;
+    background: url('bg3.gif') center/cover no-repeat;
   }
 
 .content-container {

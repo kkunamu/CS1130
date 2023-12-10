@@ -92,12 +92,14 @@ body, html {
     display: flex;
     justify-content: center; /* Center the containers horizontally */
     align-items: center; /* Center the containers vertically */
-    height: 100vh; /* Set height to 100% of the viewport height for vertical centering */
+    height: 100vh;
+    padding: 15px;
+    margin: 10px;
 }
 
 .system-container {
-    flex: 0 0 30%;
-    border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+    flex: 0 0 350px;
+    border: .5px solid #ccc; /* Optional: Add a border for better visibility */
     display: flex;
     flex-direction: column;
 }
@@ -109,15 +111,119 @@ body, html {
 
 /* Additional styling for better appearance (optional) */
 .upperbox-container {
-    background-color: #f0f0f0;
-    padding: 10px;
-    text-align: center;
+    width: 350px;
+    height: 35px;
+    opacity: 1;
+    background: #8A1B02;
+    border: 1px solid #000000;
+    border-bottom: .5px solid;
+    box-sizing: border-box;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.title {
+    color: rgb(255, 238, 238);
+    font-family: 'etw';
+    font-size: 22px;
+    font-weight: 100;
+    position: absolute;
+    top: 50%;
+    right: 32%;
+    transform: translate(-50%, -50%);
+    margin: 0;
 }
 
 .lowerbox-container {
-    padding: 20px;
+    width: 350px;
+    height: 225px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    border-bottom: .5px solid;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#employeeName,
+#daysWorked,
+#dailyRate,
+#deductionAmount {
+    margin: 5px;
+    align-self: flex-start;
+    border-width: 2px;
+    border-color: #F6A49D #F6A49D #F7CAC9 #F7CAC9;
+    font-family: 'etw';
+    font-size: 16px;
+    color: #8A1B02;
+    text-align: left;
+}
+
+.lower-lowerbox {
+    width: 350px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start; /* Left align the containers horizontally */
+    align-items: center;
+}
+
+.buttons {
+    margin-right: 8px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end; /* Right align the buttons vertically */
+    align-items: flex-end; /* Right align the buttons horizontally */
+    
+}
+
+#employeebutton {
+    width: 135px;
+    border-width: 2px;
+    border-color: #F6A49D #F6A49D #F7CAC9 #F7CAC9;
+    font-family: 'etw';
+    font-size: 14px;
+    color: #FF7297;
+}
+
+#deleteemployeebutton {
+    width: 135px;
+    border-width: 2px;
+    border-color: #F6A49D #F6A49D #F7CAC9 #F7CAC9;
+    font-family: 'etw';
+    font-size: 14px;
+    color: #FF7297;
+}
+
+#cleartablebutton {
+    width: 135px;
+    border-width: 2px;
+    border-color: #F6A49D #F6A49D #F7CAC9 #F7CAC9;
+    font-family: 'etw';
+    font-size: 14px;
+    color: #FF7297;
+}
+
+.paw {
+    flex: 0 0 40%;
+    max-width: 65px;
+    max-height: auto;
+    margin-left: 10px;
+    padding: 5px;
+    transition: transform 1s ease;
+    text-align: center; 
+    display: block;
+}
+
+
+.paw:hover {
+    transform: scale(1.1);
 }
 
 table {
@@ -135,6 +241,7 @@ th, td {
 .modal {
     display: none;
     position: fixed;
+    z-index: 1000;
     top: 0;
     left: 0;
     width: 100%;
@@ -143,6 +250,7 @@ th, td {
 }
 
 .modal-content {
+    z-index: 1001;
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;

@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pawsome operations</title>
+  <title>pawsome payroll</title>
   <link rel="stylesheet" href="payrollstyles.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
             <a href="conversions.html" class="loading-link">conversion</a>
         </div>
         <div class="topnav-right">
-            <a href="operations.html" class="loading-link">operations</a>
+            <a href="operations.html" class="loading-link">looping</a>
             <a href="incometaxcalc.html" class="loading-link">income tax</a>
         </div>
     </div>
@@ -25,16 +25,23 @@
   <div class="everything-container">
     <div class="system-container">
       <div class="upperbox-container">
-        <h2>Payroll System</h2>
+        <h2 class="title">Payroll System</h2>
       </div>
       <div class="lowerbox-container">
-          <input type="text" id="employeeName" required placeholder="Employee Name">
-          <input type="number" id="daysWorked" required placeholder="Days Worked">
-          <input type="number" id="dailyRate" required placeholder="Daily Rate">
-          <input type="number" id="deductionAmount" required placeholder="Deduction Amount">
-          <button type="submit" onclick="addEmployee(event)">Add Employee</button>
-        <button type="button" onclick="deleteEmployeeFromButton()">Delete Employee</button>
-        <button type="button" onclick="clearTableWithConfirmation()">Clear Table</button>
+            <input type="text" id="employeeName" required placeholder="Employee Name">
+            <input type="number" id="daysWorked" required placeholder="Days Worked">
+            <input type="number" id="dailyRate" required placeholder="Daily Rate">
+            <input type="number" id="deductionAmount" required placeholder="Deduction Amount">
+        <div class = "lower-lowerbox">
+            <div class="buttons">
+                <button type="submit" onclick="addEmployee(event)" id="employeebutton">Add Employee</button>
+                <button type="button" onclick="deleteEmployeeFromButton()"" id="deleteemployeebutton">Delete Employee</button>
+                <button type="button" onclick="clearTableWithConfirmation()" id="cleartablebutton">Clear Table</button>
+            </div>
+            <a href="index.html">
+                <img src="paw.png" alt="Paw Image" class="paw">
+            </a> 
+        </div>  
       </div>
     </div>
    
@@ -76,44 +83,77 @@
   </div>
 </div>
 
+<div id="validationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeValidationModal()">&times;</span>
+        <p>Please fill in all fields.</p>
+        <button onclick="closeValidationModal()">OK</button>
+    </div>
+</div>
+
+<div id="invalidInputModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeInvalidInputModal()">&times;</span>
+        <p>Invalid input. Please enter a valid line number.</p>
+        <button onclick="closeInvalidInputModal()">OK</button>
+    </div>
+</div>
+
+<div id="deleteConfirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeDeleteConfirmationModal()">&times;</span>
+        <p id="deleteConfirmationMessage"></p>
+        <button onclick="confirmDeleteEmployee()">Confirm</button>
+        <button onclick="closeDeleteConfirmationModal()">Cancel</button>
+    </div>
+</div>
+
   <script>
     let payrollData = [];
+    let indexToDelete;
 
     function addEmployee() {
-    event.preventDefault(); // Prevent the form from submitting
+        event.preventDefault(); // Prevent the form from submitting
 
-    const employeeNameInput = document.getElementById('employeeName');
-    const daysWorkedInput = document.getElementById('daysWorked');
-    const dailyRateInput = document.getElementById('dailyRate');
-    const deductionAmountInput = document.getElementById('deductionAmount');
+        const employeeNameInput = document.getElementById('employeeName');
+        const daysWorkedInput = document.getElementById('daysWorked');
+        const dailyRateInput = document.getElementById('dailyRate');
+        const deductionAmountInput = document.getElementById('deductionAmount');
 
-    const employeeName = employeeNameInput.value;  // Add this line to get the value
-    const daysWorked = parseInt(daysWorkedInput.value);
-    const dailyRate = parseFloat(dailyRateInput.value);
-    const deductionAmount = parseFloat(deductionAmountInput.value);
+        const employeeName = employeeNameInput.value;
+        const daysWorked = parseInt(daysWorkedInput.value);
+        const dailyRate = parseFloat(dailyRateInput.value);
+        const deductionAmount = parseFloat(deductionAmountInput.value);
 
-    const grossPay = daysWorked * dailyRate;
-    const netPay = grossPay - deductionAmount;
+        // Check if any input field is blank
+        if (employeeName === '' || isNaN(daysWorked) || isNaN(dailyRate) || isNaN(deductionAmount)) {
+            // Show the validation modal
+            const validationModal = document.getElementById('validationModal');
+            validationModal.style.display = 'block';
+            return; // Exit the function to prevent further execution
+        }
 
-    const payrollEntry = {
-        employeeName,
-        daysWorked,
-        dailyRate,
-        grossPay,
-        deductionAmount,
-        netPay
-    };
+        const grossPay = daysWorked * dailyRate;
+        const netPay = grossPay - deductionAmount;
 
-    payrollData.push(payrollEntry);
+        const payrollEntry = {
+            employeeName,
+            daysWorked,
+            dailyRate,
+            grossPay,
+            deductionAmount,
+            netPay
+        };
 
-    updateTable();
+        payrollData.push(payrollEntry);
 
-    employeeNameInput.value = '';
-    daysWorkedInput.value = '';
-    dailyRateInput.value = '';
-    deductionAmountInput.value = '';
-}
+        updateTable();
 
+        employeeNameInput.value = '';
+        daysWorkedInput.value = '';
+        dailyRateInput.value = '';
+        deductionAmountInput.value = '';
+    }
 
     function deleteEmployee(index) {
         payrollData.splice(index, 1);
@@ -145,7 +185,6 @@
     }
 
     function deleteEmployeeFromButton() {
-    // Show the modal
     const deleteModal = document.getElementById('deleteModal');
     deleteModal.style.display = 'block';
     }
@@ -159,18 +198,53 @@
     function deleteEmployeeFromModal() {
         const indexToDelete = parseInt(document.getElementById('deleteLineInput').value) - 1;
         if (!isNaN(indexToDelete) && indexToDelete >= 0 && indexToDelete < payrollData.length) {
-            deleteEmployee(indexToDelete);
-            closeModal();
+            // Get the employee's name for the confirmation message
+            const employeeToDelete = payrollData[indexToDelete];
+            const confirmMessage = `Delete Employee #${indexToDelete + 1} ${employeeToDelete.employeeName}?`;
+
+            // Update the message in the confirmation modal
+            const deleteConfirmationMessage = document.getElementById('deleteConfirmationMessage');
+            deleteConfirmationMessage.textContent = confirmMessage;
+
+            // Show the Delete Confirmation modal
+            const deleteConfirmationModal = document.getElementById('deleteConfirmationModal');
+            deleteConfirmationModal.style.display = 'block';
         } else {
-            alert("Invalid input. Please enter a valid line number.");
+            // Show the invalid input modal
+            const invalidInputModal = document.getElementById('invalidInputModal');
+            invalidInputModal.style.display = 'block';
         }
     }
 
-    function clearTable() {
-    payrollData = []; // Clear the data
-    updateTable(); // Update the table to reflect the changes
-    closeClearTableModal(); // Close the modal
+    function closeDeleteConfirmationModal() {
+        // Close the Delete Confirmation modal
+        const deleteConfirmationModal = document.getElementById('deleteConfirmationModal');
+        deleteConfirmationModal.style.display = 'none';
     }
+
+    function confirmDeleteEmployee() {
+        deleteEmployee(indexToDelete);
+        closeModal();
+        closeDeleteConfirmationModal();
+    }
+
+    function closeInvalidInputModal() {
+        // Close the invalid input modal
+        const invalidInputModal = document.getElementById('invalidInputModal');
+        invalidInputModal.style.display = 'none';
+    }
+
+    function closeValidationModal() {
+        // Close the validation modal
+        const validationModal = document.getElementById('validationModal');
+        validationModal.style.display = 'none';
+        }
+
+    function clearTable() {
+        payrollData = []; // Clear the data
+        updateTable(); // Update the table to reflect the changes
+        closeClearTableModal(); // Close the modal
+        }
 
     function openClearTableModal() {
         // Show the Clear Table modal

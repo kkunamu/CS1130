@@ -68,7 +68,7 @@
   <div id="deleteModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <p>Enter the line number to delete:</p>
+        <p id="linenumbertodelete">Enter the line number to delete</p>
         <input type="number" id="deleteLineInput">
         <button onclick="deleteEmployeeFromModal()">Delete</button>
     </div>
@@ -78,8 +78,11 @@
   <div class="modal-content">
       <span class="close" onclick="closeClearTableModal()">&times;</span>
       <p>Are you sure you want to clear the table?</p>
-      <button onclick="clearTable()">Confirm</button>
-      <button onclick="closeClearTableModal()">Cancel</button>
+      <div class="cleartablebuttons">
+        <button onclick="clearTable()">Confirm</button>
+        <button onclick="closeClearTableModal()">Cancel</button>
+      </div>
+      
   </div>
 </div>
 
@@ -106,6 +109,10 @@
         <button onclick="confirmDeleteEmployee()">Confirm</button>
         <button onclick="closeDeleteConfirmationModal()">Cancel</button>
     </div>
+</div>
+
+<div id="loadingOverlay">
+    <img src="loading.gif" alt="Loading Spinner">
 </div>
 
   <script>
@@ -273,6 +280,27 @@
 
     document.getElementById('homeneko').addEventListener('click', function () {
         toggleTopNav();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var links = document.querySelectorAll('a');
+        var loadingOverlay = document.getElementById('loadingOverlay');
+
+        links.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // Show loading overlay
+                loadingOverlay.style.display = 'flex';
+
+                var href = this.getAttribute('href');
+
+                // Redirect to the new webpage after a delay (adjust the delay as needed)
+                setTimeout(function () {
+                    window.location.href = href;
+                }, 1000); // Adjust the delay as needed
+            });
+        });
     });
   </script>
 

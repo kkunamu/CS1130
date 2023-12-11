@@ -40,6 +40,9 @@
           <p id="modalMessage"></p>
         </div>
     </div>
+    <div id="loadingOverlay">
+        <img src="loading.gif" alt="Loading Spinner">
+    </div>
     <script>
         function showAlert(message) {
             document.getElementById('modalMessage').innerText = message;
@@ -107,6 +110,26 @@
 
         document.getElementById('homecat').addEventListener('click', function() {
             toggleTopNav();
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var links = document.querySelectorAll('a');
+            var loadingOverlay = document.getElementById('loadingOverlay');
+
+            links.forEach(function (link) {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+
+                    // Show loading overlay
+                    loadingOverlay.style.display = 'flex';
+
+                    var href = this.getAttribute('href');
+
+                    // Redirect to the new webpage after a delay (adjust the delay as needed)
+                    setTimeout(function () {
+                        window.location.href = href;
+                    }, 1000); // Adjust the delay as needed
+                });
+            });
         });
     </script>        
 </body>

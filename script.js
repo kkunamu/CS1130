@@ -65,5 +65,37 @@ document.getElementById('homepaw').addEventListener('click', function() {
 });
 
 function navigateTo(url) {
-  window.location.href = url;
+  // Show loading overlay
+  document.getElementById('loadingOverlay').style.display = 'flex';
+
+  // Redirect to the new webpage after a delay (adjust the delay as needed)
+  setTimeout(function () {
+    window.location.href = url;
+  }, 1000); // Adjust the delay as needed
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var links = document.querySelectorAll('a');
+  var loadingOverlay = document.getElementById('loadingOverlay');
+
+  links.forEach(function (link) {
+      link.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          // Show loading overlay
+          loadingOverlay.style.display = 'flex';
+
+          var href = this.getAttribute('href');
+
+          // Redirect to the new webpage after a delay (adjust the delay as needed)
+          setTimeout(function () {
+              window.location.href = href;
+          }, 1000); // Adjust the delay as needed
+
+          // Reset the loading overlay after the delay
+          setTimeout(function () {
+              loadingOverlay.style.display = 'none';
+          }, 1000); // Adjust the delay to match the redirect delay
+      });
+  });
+});
